@@ -1,0 +1,154 @@
+{
+  "kind": "build_request",
+  "title": "Implement Test Exam Report table interface with editable test result data",
+  "projectName": "Guru Kirpa",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-14",
+      "text": "Replace the current test results display with a tabular Test Exam Report interface matching the uploaded screenshots, showing columns for 'Exam Name', 'Exam Date', 'Total', '%', 'Rank', and 'Global Rank' with a gray header row and alternating light gray/white row backgrounds",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "When I open the app, I want to see the same exact same type of interface",
+          "After that, when the student will click on test exam report, he will see a format"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Test Exam Report displays as a table with six columns: Exam Name, Exam Date, Total, %, Rank, Global Rank",
+        "Header row uses gray background (#D3D3D3 or similar)",
+        "Data rows alternate between light gray (#F5F5F5) and white backgrounds",
+        "Blue header bar (#0F5FC2) with back arrow and 'Test Exam Report' title",
+        "Orange attachment icons (📎) appear next to exam dates"
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "text": "Update the backend data model to store test results with fields for exam name (text), exam date (timestamp), total marks as 'scored/maximum' (e.g., '41/360'), percentage (number), rank (number), global rank (number or 'NA'), and optional attachment indicator (boolean)",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "I can change the test result the number fill in that result according to my need"
+        ]
+      },
+      "acceptanceCriteria": [
+        "TestResult type includes: examName, examDate, totalScored, totalMaximum, percentage, rank, globalRank, hasAttachment fields",
+        "Backend stores totalScored and totalMaximum separately to display as 'scored/maximum' format",
+        "globalRank field supports both numeric values and 'NA' text",
+        "percentage field stores decimal values (e.g., 0, 28.89, 18.47, 19.44)"
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "text": "Create admin interface allowing administrators to add, edit, and delete test result entries with all fields: exam name, exam date, total scored, total maximum, percentage, rank, global rank, and attachment indicator",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "I can change the test result the number fill in that result according to my need"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin panel includes form to add new test results with all required fields",
+        "Admin can edit existing test result entries inline or through modal",
+        "Admin can delete test result entries",
+        "Form validates that totalScored <= totalMaximum",
+        "Form allows setting globalRank as either a number or 'NA'",
+        "Changes reflect immediately in the student's Test Exam Report view"
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "text": "Implement backend CRUD operations (create, read, update, delete) for test results with role-based access control allowing admins to modify any student's test results and students to only view their own results",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "I can change the test result the number fill in that result according to my need"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend provides addTestResult, updateTestResult, deleteTestResult functions restricted to admin role",
+        "Backend provides getTestResults function returning test results for the calling student",
+        "Admin users can add/edit/delete test results for any student by specifying student principal",
+        "Students can only fetch their own test results, not modify them",
+        "All operations maintain data integrity and proper error handling"
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "text": "Display test results in the table sorted by exam date in descending order (most recent first), matching the order shown in the uploaded screenshots (GOTS Test-13 on 22 Feb, GOTS Test-12 on 21 Feb, etc.)",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Test results appear with newest exam date at the top of the table",
+        "Sorting is automatic and does not require user interaction",
+        "Table maintains consistent sorting after data updates"
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "text": "Format the Total column as 'scored/maximum' (e.g., '41/360', '117/360', '208/720', '133/720') and calculate the percentage column automatically from these values, displaying percentages with two decimal places (e.g., 28.89, 18.47, 19.44) or showing 0 for zero scores",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Total column displays as 'scored/maximum' format (e.g., '41/360')",
+        "Percentage column shows calculated value with exactly two decimal places (e.g., 28.89)",
+        "Percentage displays '0' for zero scores, not '0.00'",
+        "Percentage calculation: (scored / maximum) * 100"
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "text": "Display 'NA' text in the Global Rank column for test results that do not have a global ranking value, as shown in the uploaded screenshots for tests with 0 rank values",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Global Rank column displays 'NA' when no global rank value exists",
+        "Global Rank column displays numeric values (e.g., 19427, 19888, 20768) when available",
+        "Text 'NA' is centered and styled consistently with numeric rank values"
+      ]
+    }
+  ],
+  "constraints": [
+    "Maintain single-actor backend architecture in backend/main.mo",
+    "Preserve existing authentication flow using Internet Identity",
+    "Do not modify immutable frontend paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui",
+    "Use existing blue color scheme (#0F5FC2) for headers and primary elements",
+    "Keep the existing dashboard interface and navigation structure intact"
+  ],
+  "nonGoals": [
+    "Implementing actual attachment file upload/download functionality",
+    "Adding email notifications for test results",
+    "Creating data export features (PDF, Excel)",
+    "Implementing test result analytics or charts",
+    "Adding bulk import functionality for test results",
+    "Creating student-to-student comparison features"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-23T11:24:11.362Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 7,
+    "implemented": 5,
+    "items": [
+      {
+        "id": "REQ-14",
+        "summary": "Replace the current test results display with a tabular Test Exam Report interface matching the uploaded screenshots, showing columns for 'Exam Name', 'Exam Date', 'Total', '%', 'Rank', and 'Global Rank' with a gray header row and alternating light gray/white row backgrounds",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/TestExamReportPage.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/TestExamReportPage.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-15",
+        "summary": "Update the backend data model to store test results with fields for exam name (text), exam date (timestamp), total marks as 'scored/maximum' (e.g., '41/360'), percentage (number), rank (number), global rank (number or 'NA'), and optional attachment indicator (boolean)",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-16",
+        "summary": "Create admin interface allowing administrators to add, edit, and delete test result entries with all fields: exam name, exam date, total scored, total maximum, percentage, rank, global rank, and attachment indicator",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/AdminTestResultsPage.tsx",
+          "frontend/src/components/TestResultForm.tsx",
+          "frontend/src/hooks/useCreateTestResult.ts",
+          "frontend/src/hooks/useUpdateTestResult.ts",
+          "frontend/src/hooks/useDeleteTestResult.ts",
+          "frontend/src/hooks/useGetTestResultsFor.ts",
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/AdminTestResultsPage.tsx",
+          "frontend/src/components/TestResultForm.tsx",
+          "frontend/src/hooks/useCreateTestResult.ts",
+          "frontend/src/hooks/useUpdateTestResult.ts",
+          "frontend/src/hooks/useDeleteTestResult.ts",
+          "frontend/src/hooks/useGetTestResultsFor.ts",
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-17",
+        "summary": "Implement backend CRUD operations (create, read, update, delete) for test results with role-based access control allowing admins to modify any student's test results and students to only view their own results",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-18",
+        "summary": "Display test results in the table sorted by exam date in descending order (most recent first), matching the order shown in the uploaded screenshots (GOTS Test-13 on 22 Feb, GOTS Test-12 on 21 Feb, etc.)",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/TestExamReportPage.tsx",
+          "frontend/src/components/AdminTestResultsPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/TestExamReportPage.tsx",
+          "frontend/src/components/AdminTestResultsPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-19",
+        "summary": "Format the Total column as 'scored/maximum' (e.g., '41/360', '117/360', '208/720', '133/720') and calculate the percentage column automatically from these values, displaying percentages with two decimal places (e.g., 28.89, 18.47, 19.44) or showing 0 for zero scores",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/formatTestResult.ts",
+          "frontend/src/components/TestExamReportPage.tsx",
+          "frontend/src/components/TestResultForm.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/utils/formatTestResult.ts",
+          "frontend/src/components/TestExamReportPage.tsx",
+          "frontend/src/components/TestResultForm.tsx"
+        ]
+      },
+      {
+        "id": "REQ-20",
+        "summary": "Display 'NA' text in the Global Rank column for test results that do not have a global ranking value, as shown in the uploaded screenshots for tests with 0 rank values",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/formatTestResult.ts",
+          "frontend/src/components/TestExamReportPage.tsx",
+          "frontend/src/components/TestResultForm.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/utils/formatTestResult.ts",
+          "frontend/src/components/TestExamReportPage.tsx",
+          "frontend/src/components/TestResultForm.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "build-template/README.md",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/AdminTestResultsPage.tsx",
+    "frontend/src/components/Header.tsx",
+    "frontend/src/components/TestExamReportPage.tsx",
+    "frontend/src/components/TestResultCard.tsx",
+    "frontend/src/components/TestResultForm.tsx",
+    "frontend/src/components/TestResultsDashboard.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useCreateTestResult.ts",
+    "frontend/src/hooks/useDeleteTestResult.ts",
+    "frontend/src/hooks/useGetCallerUserRole.ts",
+    "frontend/src/hooks/useGetTestResultsFor.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/hooks/useUpdateTestResult.ts",
+    "frontend/src/utils/formatTestResult.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

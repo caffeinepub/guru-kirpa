@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 7,
+  "summary": "Educational institute app for Guru Kirpa coaching - students can view their test results",
+  "architectural_notes": [
+    "Multi-user system with student authentication required",
+    "Need to store and retrieve test results per student",
+    "Test results should display in tabular format with columns: Exam Name, Exam Date, Total marks (score/max), Percentage, Rank, Global Rank",
+    "Admin interface needed for adding/editing/deleting test results"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-implement-student-authentication-system-allowing-students-to-log-in-and-access-their-personal-test-results",
+      "title": "Implement student authentication system allowing students to log in and access their personal test results",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-frontend-interface-displaying-all-test-results-for-the-logged-in-student-in-a-clear-organized-format-showing-test-name-subject-score-and-date",
+      "title": "Build frontend interface displaying all test results for the logged-in student in a clear, organized format showing test name, subject, score, and date",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-guru-kirpa-as-the-institute-name-prominently-in-the-application-header-or-branding",
+      "title": "Display 'Guru Kirpa' as the institute name prominently in the application header or branding",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-establish-a-clean-professional-visual-design-with-a-cohesive-color-scheme-suitable-for-an-educational-institute-using-warm-and-trustworthy-colors-that-avoid-generic-blue-and-purple-combinations",
+      "title": "Establish a clean, professional visual design with a cohesive color scheme suitable for an educational institute, using warm and trustworthy colors that avoid generic blue and purple combinations",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-welcome-login-screen-with-a-dashboard-style-home-interface-that-displays-good-afternoon-or-time-appropriate-greeting-at-the-top-with-a-hamburger-menu-icon",
+      "title": "Replace the current welcome/login screen with a dashboard-style home interface that displays 'Good Afternoon' (or time-appropriate greeting) at the top with a hamburger menu icon",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-user-profile-section-below-the-greeting-that-displays-the-student-s-profile-photo-name-e-g-sameer-and-course-batch-information-e-g-neet-ts-2026-a",
+      "title": "Add a user profile section below the greeting that displays the student's profile photo, name (e.g., 'SAMEER'), and course/batch information (e.g., 'NEET TS - 2026 A')",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-promotional-banner-section-below-the-profile-that-showcases-the-gsat-gurukripa-s-scholarship-cum-admission-test-with-the-scholarship-percentage-website-url-and-contact-information",
+      "title": "Create a promotional banner section below the profile that showcases the GSAT (Gurukripa's Scholarship Cum Admission Test) with the scholarship percentage, website URL, and contact information",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-grid-of-navigation-cards-below-the-banner-with-icons-and-labels-for-class-schedule-purple-doubt-schedule-purple-attendance-green-test-exam-report-orange-test-schedule-teal-in-out-logs-yellow-and-other-relevant-features",
+      "title": "Implement a grid of navigation cards below the banner with icons and labels for: Class Schedule (purple), Doubt Schedule (purple), Attendance (green), Test Exam Report (orange), Test Schedule (teal), In Out Logs (yellow), and other relevant features",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-bottom-navigation-bar-with-four-tabs-dashboard-grid-icon-students-group-icon-notification-bell-icon-and-institute-building-icon-with-dashboard-as-the-active-default-tab",
+      "title": "Add a bottom navigation bar with four tabs: Dashboard (grid icon), Students (group icon), Notification (bell icon), and Institute (building icon), with Dashboard as the active default tab",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-neutral-grayscale-color-scheme-with-a-vibrant-blue-based-theme-using-blue-0f5fc2-or-similar-for-headers-and-primary-elements-and-colorful-accent-colors-purple-green-orange-teal-yellow-for-the-feature-cards",
+      "title": "Replace the neutral grayscale color scheme with a vibrant blue-based theme using blue (#0F5FC2 or similar) for headers and primary elements, and colorful accent colors (purple, green, orange, teal, yellow) for the feature cards",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-whatsapp-floating-action-button-in-the-top-right-corner-of-the-screen-with-a-green-circular-background-and-whatsapp-icon",
+      "title": "Add a WhatsApp floating action button in the top-right corner of the screen with a green circular background and WhatsApp icon",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-test-results-display-with-a-tabular-test-exam-report-interface-matching-the-uploaded-screenshots-showing-columns-for-exam-name-exam-date-total-rank-and-global-rank-with-a-gray-header-row-and-alternating-light-gray-white-row-backgrounds",
+      "title": "Replace the current test results display with a tabular Test Exam Report interface matching the uploaded screenshots, showing columns for 'Exam Name', 'Exam Date', 'Total', '%', 'Rank', and 'Global Rank' with a gray header row and alternating light gray/white row backgrounds",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-admin-interface-allowing-administrators-to-add-edit-and-delete-test-result-entries-with-all-fields-exam-name-exam-date-total-scored-total-maximum-percentage-rank-global-rank-and-attachment-indicator",
+      "title": "Create admin interface allowing administrators to add, edit, and delete test result entries with all fields: exam name, exam date, total scored, total maximum, percentage, rank, global rank, and attachment indicator",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-test-results-in-the-table-sorted-by-exam-date-in-descending-order-most-recent-first-matching-the-order-shown-in-the-uploaded-screenshots-gots-test-13-on-22-feb-gots-test-12-on-21-feb-etc",
+      "title": "Display test results in the table sorted by exam date in descending order (most recent first), matching the order shown in the uploaded screenshots (GOTS Test-13 on 22 Feb, GOTS Test-12 on 21 Feb, etc.)",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-format-the-total-column-as-scored-maximum-e-g-41-360-117-360-208-720-133-720-and-calculate-the-percentage-column-automatically-from-these-values-displaying-percentages-with-two-decimal-places-e-g-28-89-18-47-19-44-or-showing-0-for-zero-scores",
+      "title": "Format the Total column as 'scored/maximum' (e.g., '41/360', '117/360', '208/720', '133/720') and calculate the percentage column automatically from these values, displaying percentages with two decimal places (e.g., 28.89, 18.47, 19.44) or showing 0 for zero scores",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-na-text-in-the-global-rank-column-for-test-results-that-do-not-have-a-global-ranking-value-as-shown-in-the-uploaded-screenshots-for-tests-with-0-rank-values",
+      "title": "Display 'NA' text in the Global Rank column for test results that do not have a global ranking value, as shown in the uploaded screenshots for tests with 0 rank values",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Student login/authentication system",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Display test results for enrolled students",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Create backend data model to store and manage test results, including student information, test names, scores, dates, and subjects",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Update the backend UserProfile model to include fields for profile photo URL and course/batch information to support the new interface design",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Implement Test Exam Report interface with tabular layout showing columns for Exam Name/Date, Total marks, Percentage, Rank, and Global Rank with blue header, back navigation, and alternating row colors",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Create admin interface allowing modification of test result data including exam names, dates, scores, percentages, ranks, and global ranks",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Update the backend data model to store test results with fields for exam name (text), exam date (timestamp), total marks as 'scored/maximum' (e.g., '41/360'), percentage (number), rank (number), global rank (number or 'NA'), and optional attachment indicator (boolean)",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Implement backend CRUD operations (create, read, update, delete) for test results with role-based access control allowing admins to modify any student's test results and students to only view their own results",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Guru Kirpa",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,113 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-replace-the-current-test-results-display-with-a-tabular-test-exam-report-interface-matching-the-uploaded-screenshots-showing-columns-for-exam-name-exam-date-total-rank-and-global-rank-with-a-gray-header-row-and-alternating-light-gray-white-row-backgrounds",
+      "featureTitle": "Replace the current test results display with a tabular Test Exam Report interface matching the uploaded screenshots, showing columns for 'Exam Name', 'Exam Date', 'Total', '%', 'Rank', and 'Global Rank' with a gray header row and alternating light gray/white row backgrounds",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/TestExamReportPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-14"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-admin-interface-allowing-administrators-to-add-edit-and-delete-test-result-entries-with-all-fields-exam-name-exam-date-total-scored-total-maximum-percentage-rank-global-rank-and-attachment-indicator",
+      "featureTitle": "Create admin interface allowing administrators to add, edit, and delete test result entries with all fields: exam name, exam date, total scored, total maximum, percentage, rank, global rank, and attachment indicator",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AdminTestResultsPage.tsx",
+        "frontend/src/components/TestResultForm.tsx",
+        "frontend/src/hooks/useCreateTestResult.ts",
+        "frontend/src/hooks/useDeleteTestResult.ts",
+        "frontend/src/hooks/useGetTestResultsFor.ts",
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/hooks/useUpdateTestResult.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-16"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-display-test-results-in-the-table-sorted-by-exam-date-in-descending-order-most-recent-first-matching-the-order-shown-in-the-uploaded-screenshots-gots-test-13-on-22-feb-gots-test-12-on-21-feb-etc",
+      "featureTitle": "Display test results in the table sorted by exam date in descending order (most recent first), matching the order shown in the uploaded screenshots (GOTS Test-13 on 22 Feb, GOTS Test-12 on 21 Feb, etc.)",
+      "files": [
+        "frontend/src/components/AdminTestResultsPage.tsx",
+        "frontend/src/components/TestExamReportPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-18"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-format-the-total-column-as-scored-maximum-e-g-41-360-117-360-208-720-133-720-and-calculate-the-percentage-column-automatically-from-these-values-displaying-percentages-with-two-decimal-places-e-g-28-89-18-47-19-44-or-showing-0-for-zero-scores",
+      "featureTitle": "Format the Total column as 'scored/maximum' (e.g., '41/360', '117/360', '208/720', '133/720') and calculate the percentage column automatically from these values, displaying percentages with two decimal places (e.g., 28.89, 18.47, 19.44) or showing 0 for zero scores",
+      "files": [
+        "frontend/src/components/TestExamReportPage.tsx",
+        "frontend/src/components/TestResultForm.tsx",
+        "frontend/src/utils/formatTestResult.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-19"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-display-na-text-in-the-global-rank-column-for-test-results-that-do-not-have-a-global-ranking-value-as-shown-in-the-uploaded-screenshots-for-tests-with-0-rank-values",
+      "featureTitle": "Display 'NA' text in the Global Rank column for test results that do not have a global ranking value, as shown in the uploaded screenshots for tests with 0 rank values",
+      "files": [
+        "frontend/src/components/TestExamReportPage.tsx",
+        "frontend/src/components/TestResultForm.tsx",
+        "frontend/src/utils/formatTestResult.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-20"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

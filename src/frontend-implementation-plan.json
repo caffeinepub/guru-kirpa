@@ -1,0 +1,158 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Implement Test Exam Report table interface with editable test result data",
+  "requirements": [
+    {
+      "id": "REQ-14",
+      "summary": "Replace current test results display with tabular Test Exam Report interface matching uploaded screenshots",
+      "acceptanceCriteria": [
+        "Test Exam Report displays as a table with six columns: Exam Name, Exam Date, Total, %, Rank, Global Rank",
+        "Header row uses gray background (#D3D3D3 or similar)",
+        "Data rows alternate between light gray (#F5F5F5) and white backgrounds",
+        "Blue header bar (#0F5FC2) with back arrow and 'Test Exam Report' title",
+        "Orange attachment icons (📎) appear next to exam dates"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/TestExamReportPage.tsx",
+          "operation": "create",
+          "description": "Create a new page component that displays test results in a tabular format with columns for Exam Name, Exam Date, Total, %, Rank, and Global Rank. Include a blue header bar (#0F5FC2) with back arrow navigation and 'Test Exam Report' title. Style the table with a gray header row (#D3D3D3) and alternating light gray (#F5F5F5) and white row backgrounds. Display orange attachment icons (📎) next to exam dates when hasAttachment is true. Fetch test results using the useGetTestResults hook and display them in the table sorted by date descending (handled by REQ-18)."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the new TestExamReportPage into the application routing. Replace or integrate the existing TestResultsDashboard with navigation to TestExamReportPage. Ensure the page is accessible from the dashboard (e.g., through the orange 'Test Exam Report' button shown in the uploaded screenshot). Maintain existing authentication flow and profile setup logic."
+        }
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "summary": "Create admin interface for adding, editing, and deleting test result entries",
+      "acceptanceCriteria": [
+        "Admin panel includes form to add new test results with all required fields",
+        "Admin can edit existing test result entries inline or through modal",
+        "Admin can delete test result entries",
+        "Form validates that totalScored <= totalMaximum",
+        "Form allows setting globalRank as either a number or 'NA'",
+        "Changes reflect immediately in the student's Test Exam Report view"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/AdminTestResultsPage.tsx",
+          "operation": "create",
+          "description": "Create an admin-only page component for managing test results. Use the authorization component to restrict access to admin role users only. Include a student selector (dropdown or search) to choose which student's results to manage. Display the selected student's test results in a table with inline edit/delete actions. Include an 'Add New Test Result' button that opens a form modal. Fetch the current user's role using a query to getCallerUserRole() and display an access denied message if not admin. Use useGetTestResultsFor hook (to be created) to fetch results for the selected student. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/TestResultForm.tsx",
+          "operation": "create",
+          "description": "Create a reusable form component for adding or editing test results. Include fields for examName (text), examDate (date picker), totalScored (number), totalMaximum (number), percentage (number, calculated or manual), rank (number), globalRank (number or 'NA' text), and hasAttachment (checkbox). Implement validation: totalScored must be <= totalMaximum, all required fields must be filled. Support both 'add' and 'edit' modes via props. On submit, call the appropriate mutation hook (useCreateTestResult or useUpdateTestResult). Display success/error messages and close the form on successful submission."
+        },
+        {
+          "path": "frontend/src/hooks/useCreateTestResult.ts",
+          "operation": "create",
+          "description": "Create a React Query mutation hook that calls actor.createTestResultForStudent(student, testResult). Accept student Principal and testResult object as parameters. On success, invalidate the 'testResults' and 'testResultsFor' query keys to refresh the displayed data. Handle errors gracefully with user-friendly error messages. This hook is used by the admin form to add new test results for a selected student."
+        },
+        {
+          "path": "frontend/src/hooks/useUpdateTestResult.ts",
+          "operation": "create",
+          "description": "Create a React Query mutation hook that calls actor.updateTestResultForStudent(student, examName, updatedResult). Accept student Principal, examName string, and updatedResult object as parameters. On success, invalidate the 'testResults' and 'testResultsFor' query keys. Handle errors gracefully. This hook is used by the admin form to update existing test results."
+        },
+        {
+          "path": "frontend/src/hooks/useDeleteTestResult.ts",
+          "operation": "create",
+          "description": "Create a React Query mutation hook that calls actor.deleteTestResultForStudent(student, examName). Accept student Principal and examName string as parameters. On success, invalidate the 'testResults' and 'testResultsFor' query keys. Handle errors gracefully. This hook is used by the admin interface to delete test results."
+        },
+        {
+          "path": "frontend/src/hooks/useGetTestResultsFor.ts",
+          "operation": "create",
+          "description": "Create a React Query hook that fetches test results for a specific student by calling actor.getTestResultsFor(student). Accept student Principal as a parameter. Enable the query only when actor is available and student Principal is provided. Return an empty array if actor is unavailable. This hook is used by the admin interface to view and manage a selected student's test results."
+        },
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add exports for the new hooks: useCreateTestResult, useUpdateTestResult, useDeleteTestResult, and useGetTestResultsFor. Maintain existing exports for useGetCallerUserProfile, useSaveCallerUserProfile, and useGetTestResults."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the AdminTestResultsPage into the application routing. Add a route or navigation item that allows admin users to access the admin test results management page. Ensure the route is protected and only visible/accessible to users with admin role. Use the authorization component to enforce access control. Verify the authorization component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "summary": "Display test results sorted by exam date in descending order (most recent first)",
+      "acceptanceCriteria": [
+        "Test results appear with newest exam date at the top of the table",
+        "Sorting is automatic and does not require user interaction",
+        "Table maintains consistent sorting after data updates"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/TestExamReportPage.tsx",
+          "operation": "modify",
+          "description": "After fetching test results using useGetTestResults, sort the results array by examDate in descending order (newest first) before rendering the table. Use JavaScript's Array.sort() with a comparison function that compares BigInt examDate values. Ensure sorting is applied consistently every time the data is fetched or updated."
+        },
+        {
+          "path": "frontend/src/components/AdminTestResultsPage.tsx",
+          "operation": "modify",
+          "description": "After fetching test results for the selected student using useGetTestResultsFor, sort the results array by examDate in descending order before displaying them in the admin table. Apply the same sorting logic as in TestExamReportPage to maintain consistency."
+        }
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "summary": "Format Total column as 'scored/maximum' and calculate percentage with two decimal places",
+      "acceptanceCriteria": [
+        "Total column displays as 'scored/maximum' format (e.g., '41/360')",
+        "Percentage column shows calculated value with exactly two decimal places (e.g., 28.89)",
+        "Percentage displays '0' for zero scores, not '0.00'",
+        "Percentage calculation: (scored / maximum) * 100"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/formatTestResult.ts",
+          "operation": "create",
+          "description": "Create utility functions for formatting test result data. Include a function parseTotalMarks(totalMarks: string) that extracts scored and maximum values from the 'scored/maximum' string format (e.g., '41/360' returns {scored: 41, maximum: 360}). Include a function calculatePercentage(scored: number, maximum: number): string that computes (scored / maximum) * 100 and formats it with two decimal places, returning '0' for zero scores instead of '0.00'. Include a function formatPercentage(percentage: number): string that formats the percentage value according to the acceptance criteria."
+        },
+        {
+          "path": "frontend/src/components/TestExamReportPage.tsx",
+          "operation": "modify",
+          "description": "When rendering the Total column, display the totalMarks field value directly (it is already in 'scored/maximum' format from the backend). When rendering the Percentage column, use the formatPercentage utility function to format the percentage field value with two decimal places, displaying '0' for zero scores. Import and use the utility functions from formatTestResult.ts."
+        },
+        {
+          "path": "frontend/src/components/TestResultForm.tsx",
+          "operation": "modify",
+          "description": "When the form is used to add or edit test results, accept separate totalScored and totalMaximum input fields from the user. Before submitting to the backend, construct the totalMarks string in 'scored/maximum' format (e.g., '41/360'). Optionally, auto-calculate the percentage field as (totalScored / totalMaximum) * 100 and pre-fill it in the form, allowing the admin to override if needed. Use the calculatePercentage utility function from formatTestResult.ts."
+        }
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "summary": "Display 'NA' in Global Rank column when no global rank value exists",
+      "acceptanceCriteria": [
+        "Global Rank column displays 'NA' when no global rank value exists",
+        "Global Rank column displays numeric values (e.g., 19427, 19888, 20768) when available",
+        "Text 'NA' is centered and styled consistently with numeric rank values"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/formatTestResult.ts",
+          "operation": "modify",
+          "description": "Add a function formatGlobalRank(globalRank?: bigint): string that returns 'NA' if globalRank is undefined or null, otherwise returns the numeric value as a string. Ensure the function handles both optional bigint values and potential undefined cases."
+        },
+        {
+          "path": "frontend/src/components/TestExamReportPage.tsx",
+          "operation": "modify",
+          "description": "When rendering the Global Rank column, use the formatGlobalRank utility function to display 'NA' when the globalRank field is undefined or null, and display the numeric value when available. Apply consistent text alignment (center) and styling to both 'NA' and numeric values."
+        },
+        {
+          "path": "frontend/src/components/TestResultForm.tsx",
+          "operation": "modify",
+          "description": "In the test result form, provide a way for admins to set globalRank as either a numeric value or 'NA'. This can be implemented as a text input that accepts numbers or the literal string 'NA', or as a checkbox that toggles between numeric input and 'NA'. When submitting, convert 'NA' to undefined/null for the backend, and convert numeric strings to bigint values."
+        }
+      ]
+    }
+  ]
+}
